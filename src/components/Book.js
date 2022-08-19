@@ -9,10 +9,25 @@ const Book = ({ book }) => (
         <span>{book.title}</span>
         <span>{book.author}</span>
       </p>
+      <div>
+        <button type="button">Comments</button>
+        <button type="button">Remove</button>
+        <button type="button">Edit</button>
+      </div>
     </div>
-    <button type="button">Comment</button>
-    <button type="button">Edit</button>
-    <button type="button">Remove</button>
+    <div>
+      <p>
+        <span>50%</span>
+        <span>Complete</span>
+      </p>
+    </div>
+    <div>
+      <p>
+        <span>Current Chapter</span>
+        <span>Chapter</span>
+        <button type="button">Update Progress</button>
+      </p>
+    </div>
   </li>
 );
 
