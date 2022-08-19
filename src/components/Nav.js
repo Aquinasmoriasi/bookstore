@@ -5,7 +5,7 @@ import {
   Link,
 } from 'react-router-dom';
 import Categories from './Categories';
-import Books from './Books';
+import Books from './Allbooks';
 
 const Nav = () => (
   <>
@@ -18,11 +18,8 @@ const Nav = () => (
     </header>
     <Routes>
       <Route path="/" element={<Books />} />
-      <Route path="/Calculator" element={<Categories />} />
+      <Route path="/Categories" element={<Categories />} />
     </Routes>
-    <footer>
-      <p>&copy;App by Moriasi</p>
-    </footer>
   </>
 );
 
