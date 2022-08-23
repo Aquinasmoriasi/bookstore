@@ -1,8 +1,6 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
-import store from './redux/configureStore';
 import { addBook } from './redux/books/books';
 
 const Form = () => {
@@ -21,10 +19,11 @@ const Form = () => {
   const onSubmit = (e) => {
     const id = uuidv4();
     e.preventDefault();
-    dispatch(
-      addBook(id, title, author),
-    );
-    console.log(store.getState());
+    if (title && author) {
+      dispatch(
+        addBook(id, title, author),
+      );
+    }
     setTitle('');
     setAuthor('');
   };

@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
-const Book = ({ book }) => (
-  <li key={book.id}>
+const Book = ({ book, remove }) => (
+  <li id={book.id} key={book.id}>
     <div className="bookItem">
       <p>
         <span>Action</span>
@@ -11,7 +12,7 @@ const Book = ({ book }) => (
       </p>
       <div>
         <button type="button">Comments</button>
-        <button type="button">Remove</button>
+        <button type="button" onClick={remove}>Remove</button>
         <button type="button">Edit</button>
       </div>
     </div>
@@ -30,13 +31,5 @@ const Book = ({ book }) => (
     </div>
   </li>
 );
-
-Book.propTypes = {
-  book: PropTypes.objectOf,
-};
-
-Book.defaultProps = {
-  book: {},
-};
 
 export default Book;
