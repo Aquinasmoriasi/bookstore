@@ -1,7 +1,9 @@
-const UNDER_CONSTRUCTION = 'Under_Construction';
-const ADD_CATEGORY = 'ADD_CATEGORY';
+const ADD_CATEGORY = 'bookstore/categories/ADD_CATEGORY';
 
-const categoriesReducer = (state = '', action) => {
+const UNDER_CONSTRUCTION = 'Under_Construction';
+const initialState = [];
+
+const categoriesReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_CATEGORY:
       return action.text;
