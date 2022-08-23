@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import store from './redux/configureStore';
-// import { addBook } from './redux/books/books';
+import { addBook } from './redux/books/books';
 
 const Form = () => {
   const [title, setTitle] = useState('');
@@ -19,15 +19,11 @@ const Form = () => {
 
   const dispatch = useDispatch();
   const onSubmit = (e) => {
+    const id = uuidv4();
     e.preventDefault();
-    dispatch({
-      type: 'ADD_BOOK',
-      content: {
-        id: uuidv4(),
-        title,
-        author,
-      },
-    });
+    dispatch(
+      addBook(id, title, author),
+    );
     console.log(store.getState());
     setTitle('');
     setAuthor('');
