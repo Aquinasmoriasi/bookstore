@@ -1,15 +1,17 @@
 const UNDER_CONSTRUCTION = 'Under_Construction';
+const ADD_CATEGORY = 'ADD_CATEGORY';
 
 const categoriesReducer = (state = '', action) => {
   switch (action.type) {
-    case UNDER_CONSTRUCTION:
-      return UNDER_CONSTRUCTION;
+    case ADD_CATEGORY:
+      return action.text;
     default: return state;
   }
 };
 
 export const addCategory = () => ({
-  type: UNDER_CONSTRUCTION,
+  type: ADD_CATEGORY,
+  text: UNDER_CONSTRUCTION,
 });
 
 export default categoriesReducer;

@@ -1,6 +1,5 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 const Book = ({ book, remove }) => (
   <li id={book.id} key={book.id}>
@@ -31,5 +30,14 @@ const Book = ({ book, remove }) => (
     </div>
   </li>
 );
+
+Book.propTypes = {
+  book: PropTypes.objectOf,
+  remove: PropTypes.func.isRequired,
+};
+
+Book.defaultProps = {
+  book: PropTypes.objectOf,
+};
 
 export default Book;

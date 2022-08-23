@@ -19,7 +19,7 @@ const Form = () => {
   const onSubmit = (e) => {
     const id = uuidv4();
     e.preventDefault();
-    if (title && author) {
+    if (title.trim() && author.trim()) {
       dispatch(
         addBook(id, title, author),
       );
