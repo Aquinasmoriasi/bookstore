@@ -1,22 +1,26 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
 import Book from './Book';
+import { removeBook } from './redux/books/books';
 
-const Booklist = ({ books }) => (
-  <ul>
-    {books.map((book) => (
-      <Book key={book.id} book={book} />
-    ))}
-  </ul>
-);
+const Booklist = () => {
+  const books = useSelector((state) => state.book);
 
-Booklist.propTypes = {
-  books: PropTypes.arrayOf,
-};
+  const dispatch = useDispatch();
+  const onClick = (e) => {
+    const { id } = e.target.parentNode.parentNode.parentNode;
+    dispatch(
+      removeBook(id),
+    );
+  };
 
-Booklist.defaultProps = {
-  books: [],
+  return (
+    <ul>
+      {books.map((book) => (
+        <Book key={book.id} book={book} remove={onClick} />
+      ))}
+    </ul>
+  );
 };
 
 export default Booklist;
