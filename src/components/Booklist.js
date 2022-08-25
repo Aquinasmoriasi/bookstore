@@ -1,23 +1,23 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+// import { useSelector, useDispatch } from 'react-redux';
 import Book from './Book';
-import { removeBook } from './redux/books/books';
+// import { removeBook } from './redux/books/books';
 
 const Booklist = () => {
-  const books = useSelector((state) => state.book);
+  const books = [{ sw: 'ad' }];
 
-  const dispatch = useDispatch();
-  const onClick = (e) => {
-    const { id } = e.target.parentNode.parentNode.parentNode;
-    dispatch(
-      removeBook(id),
-    );
-  };
+  // const dispatch = useDispatch();
+  // const onClick = (e) => {
+  //   const { id } = e.target.parentNode.parentNode.parentNode;
+  //   dispatch(
+  //     removeBook(id),
+  //   );
+  // };
 
   return (
     <ul>
       {books.map((book) => (
-        <Book key={book.id} book={book} remove={onClick} />
+        <Book key={book.id} book={book} />
       ))}
     </ul>
   );

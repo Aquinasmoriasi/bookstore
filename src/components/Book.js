@@ -2,12 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Book = ({ book, remove }) => {
-  const { id, title, author } = book;
+  const {
+    id, title, author, category,
+  } = book;
   return (
     <li id={id} key={id}>
       <div className="bookItem">
         <p>
-          <span>Action</span>
+          <span>{category}</span>
           <span>{title}</span>
           <span>{author}</span>
         </p>
