@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
@@ -24,11 +25,15 @@ const Form = () => {
 
   const dispatch = useDispatch();
   const onSubmit = (e) => {
-    const id = uuidv4();
+    const item_id = uuidv4();
     e.preventDefault();
     if (title.trim() && author.trim()) {
+      const book = {
+        item_id, title, author, category,
+      };
+
       dispatch(
-        addBook(id, title, author, category),
+        addBook(book),
       );
     }
     setTitle('');

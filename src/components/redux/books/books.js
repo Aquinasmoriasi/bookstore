@@ -1,7 +1,31 @@
+/* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 const ADD_BOOK = 'bookstore/books/ADD_BOOK';
 const REMOVE_BOOK = 'bookstore/books/REMOVE_BOOK';
+
+export const addBook = createAsyncThunk(
+  ADD_BOOK,
+  async (book) => {
+    fetch('https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/DKAkmwINVPX8zbGFKB5E/books', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(book),
+    });
+    return {
+      book: [
+        book.item_id,
+        [{
+          author: book.author,
+          title: book.title,
+          category: book.category,
+        }],
+      ],
+    };
+  },
+);
 
 const initialState = {
   books: [],
@@ -21,22 +45,13 @@ const bookSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    [fetchBooks.pending]: (state) => {
-      let { status } = state;
-      status = 'pending';
-      return status;
-    },
+    [addBook.fulfilled]: (action) => action.payload,
     [fetchBooks.fulfilled]: (state, action) => {
-      let { books } = state;
-      let { status } = state;
-      status = 'sucess';
-      books = action.payload;
-      return { status, books };
+      state.status = 'sucess';
+      state.books = action.payload;
     },
-    [fetchBooks.pending]: (state) => {
-      let { status } = state;
-      status = 'rejected';
-      return status;
+    [fetchBooks.rejected]: (state) => {
+      state.status = 'rejected';
     },
   },
 });
@@ -53,16 +68,6 @@ const bookSlice = createSlice({
 //     default: return state;
 //   }
 // };
-
-export const addBook = (id, title, author, category) => ({
-  type: ADD_BOOK,
-  content: {
-    id,
-    title,
-    author,
-    category,
-  },
-});
 
 export const removeBook = (id) => ({
   type: REMOVE_BOOK,

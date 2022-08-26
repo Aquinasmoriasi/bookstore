@@ -7,7 +7,6 @@ import App from './App';
 import { fetchBooks } from './components/redux/books/books';
 
 store.dispatch(fetchBooks());
-console.log(store.getState());
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
