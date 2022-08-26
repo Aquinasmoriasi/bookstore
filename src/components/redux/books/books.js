@@ -1,54 +1,66 @@
-import { v4 as uuidv4 } from 'uuid';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
-const ADD_BOOK = 'bookstore/books/ADD_BOOK';
-const REMOVE_BOOK = 'bookstore/books/REMOVE_BOOK';
+const ADD_BOOK = 'bookstore-app/books/ADD_BOOK';
+const REMOVE_BOOK = 'bookstore-app/books/REMOVE_BOOK';
+const GET_BOOKS = 'bookstore-app/books/GET_BOOKS';
 
-const initialState = [{
-  title: 'Uncle Tom\'s Cabin',
-  author: 'Harriet Beacher Stowe',
-  id: uuidv4(),
-},
-{
-  title: 'Cannot Hurt Me ',
-  author: 'David Goggins',
-  id: uuidv4(),
-},
-{
-  title: 'When We Met',
-  author: 'Danielle Steele',
-  id: uuidv4(),
-},
-{
-  title: 'Gifted Hands',
-  author: 'Ben Carson',
-  id: uuidv4(),
-}];
+export const fetchBooks = createAsyncThunk(
+  GET_BOOKS,
+  async () => {
+    const data = await fetch('https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/DKAkmwINVPX8zbGFKB5E/books');
+    const response = await data.json();
+    const newArr = [];
+    const keys = Object.keys(response);
+    keys.map((key) => (
+      newArr.push({
+        item_id: key,
+        title: response[key][0].title,
+        author: response[key][0].author,
+        category: response[key][0].category,
+      })
+    ));
+    return newArr || [];
+  },
+);
+
+export const addBook = createAsyncThunk(
+  ADD_BOOK,
+  async (book) => {
+    await fetch('https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/DKAkmwINVPX8zbGFKB5E/books', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(book),
+    });
+    return book;
+  },
+);
+
+export const removeBook = createAsyncThunk(
+  REMOVE_BOOK,
+  async (id) => {
+    await fetch(`https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/DKAkmwINVPX8zbGFKB5E/books/${id}`, {
+      method: 'DELETE',
+      body: JSON.stringify(id),
+    });
+    return id;
+  },
+);
+
+const initialState = [];
 
 const bookReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_BOOK:
-      return [
-        ...state,
-        action.content,
-      ];
-    case REMOVE_BOOK:
-      return state.filter((book) => (book.id !== action.id));
-    default: return state;
+    case `${GET_BOOKS}/fulfilled`:
+      return action.payload;
+    case `${ADD_BOOK}/fulfilled`:
+      return [...state, action.payload];
+    case `${REMOVE_BOOK}/fulfilled`:
+      return state.filter((state) => state.item_id !== action.payload);
+    default:
+      return state;
   }
 };
-
-export const addBook = (id, title, author) => ({
-  type: ADD_BOOK,
-  content: {
-    id,
-    title,
-    author,
-  },
-});
-
-export const removeBook = (id) => ({
-  type: REMOVE_BOOK,
-  id,
-});
 
 export default bookReducer;
