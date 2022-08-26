@@ -1,13 +1,17 @@
+/* eslint-disable camelcase */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 
 const Book = ({ book, remove }) => {
-  const { id, title, author } = book;
+  const {
+    item_id, title, author, category,
+  } = book;
   return (
-    <li id={id} key={id}>
+    <li id={item_id} key={item_id}>
       <div className="bookItem">
         <p>
-          <span>Action</span>
+          <span>{category}</span>
           <span>{title}</span>
           <span>{author}</span>
         </p>
@@ -35,12 +39,13 @@ const Book = ({ book, remove }) => {
 };
 
 Book.propTypes = {
-  book: PropTypes.objectOf,
+  book: PropTypes.shape({
+    item_id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+  }).isRequired,
   remove: PropTypes.func.isRequired,
-};
-
-Book.defaultProps = {
-  book: {},
 };
 
 export default Book;
