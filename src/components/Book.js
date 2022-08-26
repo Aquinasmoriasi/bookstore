@@ -7,6 +7,7 @@ const Book = ({ book, remove }) => {
   const {
     item_id, title, author, category,
   } = book;
+  const num = Math.floor(Math.random() * 100);
   return (
     <li id={item_id} key={item_id}>
       <div className="bookItem">
@@ -21,17 +22,25 @@ const Book = ({ book, remove }) => {
           <button type="button" className="other-info">Edit</button>
         </div>
       </div>
-      <div>
+      <div className="percentage">
+        <div className="circle-wrap">
+          <div className="inside-circle" />
+          <div className="progress" />
+        </div>
         <p>
-          <span>50%</span>
-          <span>Complete</span>
+          <span>
+            {num}
+            %
+          </span>
+          <br />
+          <span>Completed</span>
         </p>
       </div>
-      <div>
+      <div className="chapter">
         <p>
-          <span>Current Chapter</span>
-          <span>Chapter</span>
-          <button type="button">Update Progress</button>
+          <span>CURRENT CHAPTER</span>
+          <span>Chapter 12</span>
+          <button type="button">UPDATE PROGRESS</button>
         </p>
       </div>
     </li>
