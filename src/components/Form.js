@@ -8,7 +8,7 @@ import { addBook } from './redux/books/books';
 const Form = () => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState('General');
   const dispatch = useDispatch();
 
   const onTitleChange = (e) => {
@@ -19,7 +19,7 @@ const Form = () => {
     setAuthor(e.target.value);
   };
 
-  const categories = ['Fiction', 'Science', 'Arts', 'Math', 'History', 'Romance', 'Geography'];
+  const categories = ['General', 'Fiction', 'Science', 'Arts', 'Math', 'History', 'Romance', 'Geography'];
   const onCategoryChange = (e) => {
     setCategory(e.target.value);
   };
