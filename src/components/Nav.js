@@ -4,6 +4,7 @@ import {
   Route,
   Link,
 } from 'react-router-dom';
+import { IoIosPerson } from 'react-icons/io';
 import Categories from './Categories';
 import Books from './Allbooks';
 
@@ -15,6 +16,7 @@ const Nav = () => (
         <Link to="/">Books</Link>
         <Link to="/Categories">Categories</Link>
       </nav>
+      <IoIosPerson />
     </header>
     <Routes>
       <Route path="/" element={<Books />} />

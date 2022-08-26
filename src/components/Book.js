@@ -11,14 +11,14 @@ const Book = ({ book, remove }) => {
     <li id={item_id} key={item_id}>
       <div className="bookItem">
         <p>
-          <span>{category}</span>
-          <span>{title}</span>
-          <span>{author}</span>
+          <span className="category">{category}</span>
+          <span className="title">{title}</span>
+          <span className="other-info">{author}</span>
         </p>
-        <div>
-          <button type="button">Comments</button>
-          <button type="button" onClick={remove}>Remove</button>
-          <button type="button">Edit</button>
+        <div className="book-btns">
+          <button type="button" className="other-info">Comments</button>
+          <button type="button" className="other-info" onClick={remove}>Remove</button>
+          <button type="button" className="other-info">Edit</button>
         </div>
       </div>
       <div>

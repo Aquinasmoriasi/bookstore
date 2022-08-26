@@ -62,4 +62,19 @@ li {
   background-color: #fafafa;
   width: 100%;
   padding: 1.5rem 3rem;
+  display: flex;
+}
+
+.bookItem {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border: 1px solid;
+}
+
+.bookItem p {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border: 1px solid;
 }
