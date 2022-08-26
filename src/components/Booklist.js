@@ -1,23 +1,29 @@
-import React from 'react';
-// import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux/es/exports';
+import { fetchBooks, removeBook } from './redux/books/books';
 import Book from './Book';
-// import { removeBook } from './redux/books/books';
 
 const Booklist = () => {
-  const books = [{ sw: 'ad' }];
+  const books = useSelector((state) => state.books);
+  const dispatch = useDispatch();
+  const onClickHandler = (e) => {
+    const { id } = e.target.parentNode.parentNode.parentNode;
+    dispatch(removeBook(id));
+  };
 
-  // const dispatch = useDispatch();
-  // const onClick = (e) => {
-  //   const { id } = e.target.parentNode.parentNode.parentNode;
-  //   dispatch(
-  //     removeBook(id),
-  //   );
-  // };
+  useEffect(() => {
+    dispatch(fetchBooks());
+  }, []);
 
   return (
     <ul>
       {books.map((book) => (
-        <Book key={book.id} book={book} />
+        <Book
+          id={book.item_id}
+          key={book.item_id}
+          book={book}
+          remove={onClickHandler}
+        />
       ))}
     </ul>
   );

@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
+
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux/es/exports';
 import { v4 as uuidv4 } from 'uuid';
 import { addBook } from './redux/books/books';
 
@@ -8,6 +9,7 @@ const Form = () => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [category, setCategory] = useState('');
+  const dispatch = useDispatch();
 
   const onTitleChange = (e) => {
     setTitle(e.target.value);
@@ -18,24 +20,17 @@ const Form = () => {
   };
 
   const categories = ['Fiction', 'Science', 'Arts', 'Math', 'History', 'Romance', 'Geography'];
-
   const onCategoryChange = (e) => {
     setCategory(e.target.value);
   };
 
-  const dispatch = useDispatch();
   const onSubmit = (e) => {
-    const item_id = uuidv4();
     e.preventDefault();
-    if (title.trim() && author.trim()) {
-      const book = {
-        item_id, title, author, category,
-      };
-
-      dispatch(
-        addBook(book),
-      );
-    }
+    const item_id = uuidv4();
+    const book = {
+      item_id, title, author, category,
+    };
+    dispatch(addBook(book));
     setTitle('');
     setAuthor('');
     setCategory('General');
@@ -43,16 +38,17 @@ const Form = () => {
   return (
     <div className="addBook">
       <h2>ADD NEW BOOK</h2>
-      <form action="#" onSubmit={onSubmit}>
-        <input type="text" name="title" placeholder="Book title" onChange={onTitleChange} value={title} />
-        <input type="text" name="author" placeholder="Author" onChange={onAuthorChange} value={author} />
+      <form onSubmit={onSubmit}>
+        <input type="text" placeholder="Book Title" onChange={onTitleChange} name="title" value={title} />
+        <input type="text" placeholder="Book Author" onChange={onAuthorChange} name="author" value={author} />
         <select name="Category" onClick={onCategoryChange}>
           {categories.map((cat) => (
             <option key={cat} value={cat}>{cat}</option>
           ))}
         </select>
-
-        <button type="submit">ADD BOOK</button>
+        <button type="submit">
+          Add Book
+        </button>
       </form>
     </div>
   );
