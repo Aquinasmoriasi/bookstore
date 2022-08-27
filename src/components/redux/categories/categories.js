@@ -1,6 +1,6 @@
 const ADD_CATEGORY = 'bookstore/categories/ADD_CATEGORY';
 
-const UNDER_CONSTRUCTION = 'Under_Construction';
+const UNDER_CONSTRUCTION = 'Under Construction';
 const initialState = [];
 
 const categoriesReducer = (state = initialState, action) => {

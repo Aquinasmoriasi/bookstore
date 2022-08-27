@@ -51,9 +51,7 @@ const Form = () => {
               <option key={cat} value={cat}>{cat}</option>
             ))}
           </select>
-          <button type="submit">
-            Add Book
-          </button>
+          <button type="submit">Add Book</button>
         </form>
       </div>
     </div>

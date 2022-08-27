@@ -16,7 +16,7 @@ const Nav = () => (
         <Link to="/">Books</Link>
         <Link to="/Categories">Categories</Link>
       </nav>
-      <IoIosPerson />
+      <IoIosPerson className="icon" />
     </header>
     <Routes>
       <Route path="/" element={<Books />} />
