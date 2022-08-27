@@ -11,27 +11,32 @@ const Book = ({ book, remove }) => {
     <li id={item_id} key={item_id}>
       <div className="bookItem">
         <p>
-          <span>{category}</span>
-          <span>{title}</span>
-          <span>{author}</span>
+          <span className="category">{category}</span>
+          <span className="title">{title}</span>
+          <span className="other-info">{author}</span>
         </p>
-        <div>
-          <button type="button">Comments</button>
-          <button type="button" onClick={remove}>Remove</button>
-          <button type="button">Edit</button>
+        <div className="book-btns">
+          <button type="button" className="other-info">Comments</button>
+          <button type="button" className="other-info" onClick={remove}>Remove</button>
+          <button type="button" className="other-info">Edit</button>
         </div>
       </div>
-      <div>
+      <div className="percentage">
+        <div className="circle-wrap">
+          <div className="inside-circle" />
+          <div className="progress" />
+        </div>
         <p>
-          <span>50%</span>
-          <span>Complete</span>
+          <span>0%</span>
+          <br />
+          <span>Completed</span>
         </p>
       </div>
-      <div>
+      <div className="chapter">
         <p>
-          <span>Current Chapter</span>
-          <span>Chapter</span>
-          <button type="button">Update Progress</button>
+          <span>CURRENT CHAPTER</span>
+          <span>Chapter 1</span>
+          <button type="button">UPDATE PROGRESS</button>
         </p>
       </div>
     </li>
